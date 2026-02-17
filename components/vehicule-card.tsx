@@ -3,7 +3,6 @@
 import { useRef, useCallback } from "react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Car, Fuel, Gauge, Calendar } from "lucide-react"
 import type { Vehicule } from "@/lib/vehicules"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -25,7 +24,7 @@ export default function VehiculeCard({ vehicule }: { vehicule: Vehicule }) {
 
   return (
     <Card className="overflow-hidden border-0 shadow-md group hover:shadow-xl transition-shadow">
-      <div className="bg-gradient-to-br from-gray-100 to-gray-200 relative">
+      <div className="bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
         {hasMultipleImages ? (
           <div className="swiper-3d-container">
             {/* Main Swiper – Cube Effect */}
@@ -86,11 +85,25 @@ export default function VehiculeCard({ vehicule }: { vehicule: Vehicule }) {
             <Car className="w-16 h-16 text-gray-300" />
           </div>
         )}
+        {/* Rubans diagonaux défilants "VENDU" */}
         {vehicule.vendu && (
-          <div className="absolute top-3 right-3 z-10">
-            <Badge className="bg-red-500 text-white border-0 text-sm font-semibold px-3 py-1">
-              Vendu
-            </Badge>
+          <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+            {/* Ruban 1 */}
+            <div className="vendu-ribbon vendu-ribbon-1">
+              <div className="vendu-ribbon-track">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <span key={i} className="vendu-ribbon-text">VENDU</span>
+                ))}
+              </div>
+            </div>
+            {/* Ruban 2 */}
+            <div className="vendu-ribbon vendu-ribbon-2">
+              <div className="vendu-ribbon-track vendu-ribbon-track-reverse">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <span key={i} className="vendu-ribbon-text">VENDU</span>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
