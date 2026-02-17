@@ -112,6 +112,9 @@ export default function VehiculeCard({ vehicule }: { vehicule: Vehicule }) {
             {vehicule.carburant}
           </span>
         </div>
+        {vehicule.information && (
+          <p className="text-gray-500 text-sm mt-2 line-clamp-2">{vehicule.information}</p>
+        )}
         <p className="text-primary font-bold text-xl mt-3">
           {vehicule.prix.toLocaleString("fr-FR")} €
         </p>

@@ -26,6 +26,7 @@ export default function VehiculeForm({ vehicule, onSubmit, onCancel }: Props) {
     kilometrage: vehicule?.kilometrage ?? 0,
     carburant: vehicule?.carburant ?? "Diesel",
     image_urls: vehicule?.image_urls ?? [],
+    information: vehicule?.information ?? "",
     vendu: vehicule?.vendu ?? false,
   })
   const [submitting, setSubmitting] = useState(false)
@@ -111,6 +112,17 @@ export default function VehiculeForm({ vehicule, onSubmit, onCancel }: Props) {
             ))}
           </select>
         </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Informations supplémentaires</label>
+        <textarea
+          value={form.information}
+          onChange={(e) => setForm({ ...form, information: e.target.value })}
+          placeholder="Options, état, historique..."
+          rows={3}
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        />
       </div>
 
       {/* Multi-image upload */}

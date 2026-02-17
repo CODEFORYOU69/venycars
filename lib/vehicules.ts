@@ -9,6 +9,7 @@ export type Vehicule = {
   kilometrage: number
   carburant: string
   image_urls: string[]
+  information: string
   vendu: boolean
   created_at: string
 }

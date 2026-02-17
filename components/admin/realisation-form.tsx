@@ -17,6 +17,7 @@ type Props = {
 export default function RealisationForm({ onSubmit, onCancel }: Props) {
   const [form, setForm] = useState<RealisationInsert>({
     titre: "",
+    information: "",
     image_avant_url: "",
     image_apres_url: "",
   })
@@ -49,6 +50,17 @@ export default function RealisationForm({ onSubmit, onCancel }: Props) {
           onChange={(e) => setForm({ ...form, titre: e.target.value })}
           required
           placeholder="Réparation aile avant Clio"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Informations supplémentaires</label>
+        <textarea
+          value={form.information}
+          onChange={(e) => setForm({ ...form, information: e.target.value })}
+          placeholder="Détails du travail réalisé..."
+          rows={3}
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
       </div>
 

@@ -100,6 +100,9 @@ function BeforeAfterSlider({ realisation }: { realisation: Realisation }) {
       </div>
       <div className="bg-white p-4">
         <h3 className="font-heading font-semibold text-primary-dark">{realisation.titre}</h3>
+        {realisation.information && (
+          <p className="text-gray-500 text-sm mt-1">{realisation.information}</p>
+        )}
       </div>
     </div>
   )

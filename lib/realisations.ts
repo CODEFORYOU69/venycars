@@ -5,6 +5,7 @@ export type Realisation = {
   titre: string
   image_avant_url: string
   image_apres_url: string
+  information: string
   created_at: string
 }
 
