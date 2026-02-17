@@ -15,3 +15,82 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair), serif;
 }
+
+/* ── Swiper Cube + 3D Pagination ── */
+
+/* Container for the cube + pagination */
+.swiper-3d-container {
+  position: relative;
+  padding-bottom: 48px; /* room for 3D pagination */
+}
+
+/* Cube Swiper – hide default pagination inside */
+.vehicule-swiper-cube .swiper-pagination {
+  display: none;
+}
+
+/* Cube slide shadows – softer */
+.vehicule-swiper-cube .swiper-slide-shadow-left,
+.vehicule-swiper-cube .swiper-slide-shadow-right {
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+/* ── 3D Pagination row below the cube ── */
+.swiper-3d-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  perspective: 300px;
+  padding: 8px 0 4px;
+}
+
+/* Each bullet = thumbnail image with 3D tilt */
+.swiper-3d-pagination .swiper-pagination-bullet {
+  display: inline-block;
+  width: 44px;
+  height: 32px;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.55;
+  background: #d1d5db;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: rotateX(35deg) scale(0.85);
+  transform-origin: center bottom;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.swiper-3d-pagination .swiper-pagination-bullet img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Active bullet – flat, full opacity, highlighted */
+.swiper-3d-pagination .swiper-pagination-bullet-active {
+  opacity: 1;
+  transform: rotateX(0deg) scale(1);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.2),
+    0 0 0 2px var(--primary, #2563eb);
+}
+
+/* Neighbor bullets – slightly less tilt */
+.swiper-3d-pagination .swiper-pagination-bullet-active + .swiper-pagination-bullet {
+  opacity: 0.75;
+  transform: rotateX(20deg) scale(0.9);
+}
+
+/* Hover on inactive bullet */
+.swiper-3d-pagination .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
+  opacity: 0.85;
+  transform: rotateX(15deg) scale(0.95);
+}

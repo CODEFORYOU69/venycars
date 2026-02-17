@@ -1,11 +1,24 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "motion/react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Car, ShieldCheck, Handshake } from "lucide-react"
+import VehiculeCard from "@/components/vehicule-card"
+import { getVehiculesDisponibles, type Vehicule } from "@/lib/vehicules"
 
 export default function AchatVente() {
+  const [vehicules, setVehicules] = useState<Vehicule[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getVehiculesDisponibles()
+      .then(setVehicules)
+      .catch(() => setVehicules([]))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <section id="achat-vente" className="py-20 md:py-28 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,31 +78,51 @@ export default function AchatVente() {
           ))}
         </div>
 
-        {/* Vehicle placeholder grid */}
+        {/* Vehicle grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="overflow-hidden border-0 shadow-md group hover:shadow-xl transition-shadow">
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <Car className="w-16 h-16 text-gray-300" />
-                </div>
-                <CardContent className="pt-4 pb-6">
-                  <Badge variant="outline" className="mb-2">Bientôt disponible</Badge>
-                  <h4 className="font-heading font-semibold text-primary-dark">
-                    Véhicule à venir
-                  </h4>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Contactez-nous pour connaître nos véhicules disponibles
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="overflow-hidden border-0 shadow-md animate-pulse">
+                  <div className="aspect-video bg-gray-200" />
+                  <CardContent className="pt-4 pb-6">
+                    <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
+                    <div className="h-4 bg-gray-200 rounded w-1/2" />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : vehicules.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {vehicules.map((vehicule) => (
+                <VehiculeCard key={vehicule.id} vehicule={vehicule} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="overflow-hidden border-0 shadow-md group hover:shadow-xl transition-shadow">
+                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <Car className="w-16 h-16 text-gray-300" />
+                  </div>
+                  <CardContent className="pt-4 pb-6">
+                    <Badge variant="outline" className="mb-2">Bientôt disponible</Badge>
+                    <h4 className="font-heading font-semibold text-primary-dark">
+                      Véhicule à venir
+                    </h4>
+                    <p className="text-sm text-gray-500 mt-1">
+                      Contactez-nous pour connaître nos véhicules disponibles
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

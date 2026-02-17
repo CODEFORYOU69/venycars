@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Phone, Wrench, ShieldCheck, Car, MessageCircle } from "lucide-react"
+import { Phone, Wrench, ShieldCheck, Car, MessageCircle, Images } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
   { label: "Services", href: "#services" },
+  { label: "Galerie", href: "#galerie" },
   { label: "Loi Hamon", href: "#loi-hamon" },
   { label: "Achat-Vente", href: "#achat-vente" },
   { label: "Contact", href: "#contact" },
@@ -14,7 +15,7 @@ const navLinks = [
 
 const mobileNavItems = [
   { label: "Services", href: "#services", icon: Wrench },
-  { label: "Loi Hamon", href: "#loi-hamon", icon: ShieldCheck },
+  { label: "Galerie", href: "#galerie", icon: Images },
   { label: "Achat-Vente", href: "#achat-vente", icon: Car },
   { label: "Contact", href: "#contact", icon: MessageCircle },
   { label: "Appeler", href: "tel:0777734664", icon: Phone },
