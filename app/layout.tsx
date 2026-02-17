@@ -13,6 +13,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  icons: { icon: "/logo.png" },
   title: "Veny Cars — Carrosserie Autos & Peinture à St Genis Laval",
   description:
     "Carrosserie, peinture, pare-brise et achat-vente de véhicules à St Genis Laval (69230). Franchise offerte pour tout sinistre assurance. Appelez le 07 77 73 46 64.",
